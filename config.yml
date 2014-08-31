@@ -16,6 +16,7 @@ groups:
       - app/styles
     concat:
       "/styles/app.css": "app/styles/**/[a-z]*.{css,scss,sass}"
+      "/styles/vendor.css": "vendor/*.{css,scss,sass}"
   images:
     paths:
       - app/images
@@ -43,9 +44,9 @@ revision:
     - index.html
 notification: true
 bundles:
-  jquery.js:
-    version: 1.10.2
-    url: http://code.jquery.com/jquery-1.10.2.js
-  handlebars.js:
-    version: 1.0.0
-    url: https://raw.github.com/wycats/handlebars.js/1.0.0/dist/handlebars.runtime.js
+  pokeball.js:
+    version: master
+    url: http://git.aixforce.com/terminus/pokeball/raw/master/public/pokeball.js
+  "pokeball.css":
+    version: "master"
+    url: "http://git.aixforce.com/terminus/pokeball/raw/master/public/pokeball.css"
