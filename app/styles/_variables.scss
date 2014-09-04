@@ -1,0 +1,43 @@
+//
+// Colors
+// ----------------------------------------------------------------------------------
+
+// link colors
+$default-link-color: #4287c8 !default;
+$default-hover-color: #f7ab00 !default;
+
+// focus colors
+$default-focus-color: #129fea !default;
+
+// grayscale colors
+$default-body-color: #717171 !default;
+$default-overlay-color: #999999 !default;
+$default-note-color: #cccccc !default;
+$default-background-color: #f4f4f4 !default;
+$default-border-color: #eeeeee !default;
+$default-darken-border-color: #dddddd !default;
+
+// various colors
+$default-danger-color: #cc003a !default;
+$default-primary-color: #303b86 !default;
+$default-warning-color: #fdab39 !default;
+$default-success-color: #729755 !default;
+$default-info-color: #273485 !default;
+
+//
+// Typography
+// ----------------------------------------------------------------------------------
+$default-font-family-sans-serif: tahoma, arial, "Hiragino Sans GB W3", \5b8b\4f53, sans-serif !default;
+$default-font-family-monospace: Monaco, Menlo, Consolas, "Courier New", monospace !default;
+$default-font-family: $default-font-family-sans-serif !default;
+
+$default-header-font-family: "Microsoft YaHei", "Hiragino Sans GB W3", "WenQuanYi Micro Hei", sans-serif !default;
+
+$default-font-size: 12px !default;
+$default-line-height: 14px !default;
+
+// border radius
+$default-border-radius: 4px !default;
+
+// caret size
+$caret-size: 5px !default;

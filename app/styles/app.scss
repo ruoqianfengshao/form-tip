@@ -1,1 +1,117 @@
 @import "icons";
+@import "variables";
+@import "mixins";
+@import "compass/css3/inline-block";
+
+@mixin tip-color ($color) {
+  $TipBackColor: lighten($color, 55%);
+  $TipBorderColor: lighten($color, 40%);
+  color: $color;
+  border-color: $TipBorderColor;
+  background-color: $TipBackColor;
+  white-space: nowrap;
+  &.up {
+    &:before {
+      @include arrow();
+      top: -12px;
+      left: 10px;
+      border-color: transparent transparent $TipBorderColor transparent;
+    }
+
+    &:after {
+      @include arrow();
+      top: -11px;
+      left: 10px;
+      border-color: transparent transparent $TipBackColor transparent;
+    }
+  }
+
+  &.left {
+    &:before {
+      @include arrow();
+      left: -12px;
+      top: 7px;
+      border-color: transparent $TipBorderColor transparent transparent;
+    }
+
+    &:after {
+      @include arrow();
+      left: -11px;
+      top: 7px;
+      border-color: transparent $TipBackColor transparent transparent;
+    }
+  }
+
+  &.down {
+    &:before {
+      @include arrow();
+      left: 10px;
+      top: 26px;
+      border-color: $TipBorderColor transparent transparent transparent;
+    }
+
+    &:after {
+      @include arrow();
+      left: 10px;
+      top: 25px;
+      border-color: $TipBackColor transparent transparent transparent;
+    }
+  }
+}
+
+.tip {
+  position: relative;
+  left: 0px;
+  z-index: 20;
+  padding: 0 10px;
+  height: 26px;
+  line-height: 26px;
+  @include inline-block(middle);
+  border: 1px solid white;
+  color: $default-note-color;
+  border-radius: $default-border-radius;
+
+  .tip-icon {
+    float: left;
+    margin-right: 4px;
+
+    i {
+      width: 16px;
+      height: 16px;
+      margin-top: 5px;
+      @include inline-block(baseline);
+    }
+  }
+
+  .tip-message {
+    float: left;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.tip-success {
+  @include tip-color($default-success-color);
+}
+
+.tip-warning{
+  @include tip-color($default-warning-color);
+}
+
+.tip-error {
+  @include tip-color($default-danger-color);
+}
+
+.tip-info {
+  @include tip-color($default-info-color);
+}
+
+.parent-position {
+  position: relative;
+}
+
+.tip {
+  position: absolute;
+}
