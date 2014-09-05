@@ -11,7 +11,7 @@ validate =
 
   # 获取待校验项的值
   getVal: ($item) ->
-    $item.val() || (if $item.is('[contenteditable]') then $item.text() else '')
+    $item.data("value") || $item.val() || (if $item.is('[contenteditable]') then $item.text() else '')
 
   # 添加 `novalidate` 到 form 中，防止浏览器默认的校验（样式不一致并且太丑）
   novalidate: ($form) ->
@@ -43,7 +43,7 @@ validate =
       @errorFields.push {$el: $item, parent, type, error: message}
 
   validateFields: ($fields, parent)->
-
+    # TO DO blur tip
 
   tipAll: (direct)->
     $.each @errorFields, (n, i) ->
@@ -67,6 +67,5 @@ validate =
 
   clearError: ($form) ->
     $form.find(".tip").remove()
-
 
 module.exports = validate
