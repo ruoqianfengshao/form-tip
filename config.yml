@@ -8,7 +8,9 @@ groups:
       "/scripts/app.js": "app/**/*.{js,coffee}"
       "/scripts/vendor.js": "vendor/**/*.{js,coffee}"
     order:
-      - vendor/jquery-1.10.2.js
+      - vendor/jquery.js
+      - app/scripts/helper/validate.coffee
+      - app/scripts/helper/pattern.coffee
       - ...
       - app/scripts/app.coffee
   styles:
@@ -44,9 +46,9 @@ revision:
     - index.html
 notification: true
 bundles:
-  pokeball.js:
-    version: master
-    url: http://git.aixforce.com/terminus/pokeball/raw/master/public/pokeball.js
-  "pokeball.css":
-    version: "master"
-    url: "http://git.aixforce.com/terminus/pokeball/raw/master/public/pokeball.css"
+  handlebars.js:
+    version: 1.3.0
+    url: http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars.runtime-v1.3.0.js
+  jquery.js:
+    version: 1.10.2
+    url: http://code.jquery.com/jquery-1.10.2.js

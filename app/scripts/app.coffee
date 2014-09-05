@@ -1,3 +1,10 @@
+require "helper/pattern"
+require "helper/validate"
+require "component/validate"
+
 module.exports = ->
-  $("body").append Handlebars.templates["welcome"]()
   console.info "log from app!"
+  $(".form").validateTip()
+  $(".form").on "submit", (evt)->
+    evt.preventDefault()
+    console.log "success!"

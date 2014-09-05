@@ -66,6 +66,7 @@
   padding: 0 10px;
   height: 26px;
   line-height: 26px;
+  font-size: 12px;
   @include inline-block(middle);
   border: 1px solid white;
   color: $default-note-color;

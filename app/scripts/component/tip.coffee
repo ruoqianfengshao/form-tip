@@ -1,4 +1,4 @@
-tipTemplate = Handlebars.templates["common/tip_and_alert/templates/tip"]
+tipTemplate = Handlebars.templates["tip"]
 
 class Tip
   constructor: (@options)->
@@ -11,22 +11,29 @@ class Tip
     @width = @options.width
     @left = @options.left
     @top = @options.top
-    @tipInterval = @options.interval or 3000
-    @noInterval = @options.noInterval or false
     @otherClass = @options.otherClass
     @otherCss = @options.otherCss
+    @getInterval()
+
+  getInterval: ->
+    @interval = if @options.interval then @options.interval else 3000
+    @noInterval = if @options.interval then false else true
 
   tip: =>
     $(".tip").remove() unless @noInterval
     $(@parent).addClass("parent-position")
-    $(@parent).append(tipTemplate({type: @type, direct:@direct, message:@message, width: @width, left:@left, top: @top, otherClass: @otherClass, otherCss: @otherCss}))
-    _.delay tipOrAlertRemove, @tipInterval, ".tip" unless @noInterval
-    _.delay parentPositionRevert, @tipInterval, @parent unless @noInterval
+    $(@parent).append(tipTemplate({type: @type, direct: @direct, message: @message, width: @width, left:@left, top: @top, otherClass: @otherClass, otherCss: @otherCss}))
+    # _.delay tipOrAlertRemove, @interval, ".tip" unless @noInterval
+    # _.delay parentPositionRevert, @interval, @parent unless @noInterval
 
   tipOrAlertRemove = (target)->
     $(target).remove()
 
   parentPositionRevert = (target)->
     $(target).removeClass("parent-position")
+
+  # API for element tip
+  $(document).on "blur", ->
+
 
 module.exports =  Tip

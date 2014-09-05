@@ -1,7 +1,8 @@
-patterns =
+module.exports =
   # 当前校验的元素，默认没有，在 `validate()` 方法中传入
   # $item: {}
 
+  # 邮箱：宽泛的正则校验
   email: (text) ->
     /^(?:[a-z0-9]+[_\-+.]+)*[a-z0-9]+@(?:([a-z0-9]+-?)*[a-z0-9]+.)+([a-z]{2,})+$/i.test(text)
 
@@ -10,7 +11,7 @@ patterns =
   date: (text) ->
     reg = /^([1-2]\d{3})([-\/.])?(1[0-2]|0?[1-9])([-\/.])?([1-2]\d|3[01]|0?[1-9])$/
 
-    return false if (!reg.test(text))
+    false if (!reg.test(text))
 
     taste = reg.exec(text)
     year = +taste[1]
@@ -20,7 +21,7 @@ patterns =
 
     year is d.getFullYear() and month is d.getMonth() and day is d.getDate()
 
-  # 手机：仅中国手机适应；以 1 开头，第二位是 3-9，并且总位数为 11 位数字
+  # 手机：仅中国手机适应；以 1 开头，第二位是 3,4,5,7,8,9，并且总位数为 11 位数字
   mobile: (text) ->
     /^1[3|4|5|7|8|9]\d{9}$/.test(text)
 
@@ -31,11 +32,11 @@ patterns =
     /^(?:(?:0\d{2,3}[- ]?[1-9]\d{6,7})|(?:[48]00[- ]?[1-9]\d{6}))$/.test(text)
 
   number: (text) ->
-    min = +this.$item.attr('min')
-    max = +this.$item.attr('max')
+    min = +@$item.attr('min')
+    max = +@$item.attr('max')
     result = /^\-?(?:[1-9]\d*|0)(?:[.]\d+)?$/.test(text)
     text = +text
-    step = +this.$item.attr('step')
+    step = +@$item.attr('step')
 
     # ignore invalid range silently
     isNaN(min) and (min = text - 1)
@@ -46,7 +47,7 @@ patterns =
 
   # 判断是否在 min / max 之间
   range: (text) ->
-    this.number(text)
+    @number(text)
 
   # 支持类型:
   # http(s)://(username:password@)(www.)domain.(com/co.uk)(/...)
@@ -74,7 +75,7 @@ patterns =
 
   # 密码项目前只是不为空就 ok，可以自定义
   password: (text) ->
-    this.text(text)
+    @text(text)
 
   checkbox: ->
     patterns._checker('checkbox')
@@ -85,13 +86,13 @@ patterns =
 
   _checker: (type) ->
     # TODO: a better way?!
-    form = this.$item.parents('form').eq(0)
-    identifier = 'input:' + type + '[name="' + this.$item.attr('name') + '"]'
+    form = @$item.parents('form').eq(0)
+    identifier = 'input:' + type + '[name="' + @$item.attr('name') + '"]'
     result = false
     $items = $(identifier, form)
 
     # TODO: a faster way?!
-    _.each items (item) ->
+    @$item.each (i, item) ->
       result = true if item.checked and !result
 
     result
@@ -99,7 +100,7 @@ patterns =
   # text[notEmpty] 表单项不为空
   # [type=text] 也会进这项
   text: (text) ->
-    max = parseInt(this.$item.attr('maxlength'), 10)
+    max = parseInt(@$item.attr('maxlength'), 10)
 
     notEmpty = (text) ->
       !!text.length and !/^\s+$/.test(text)
