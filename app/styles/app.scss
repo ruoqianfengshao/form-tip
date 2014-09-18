@@ -3,62 +3,6 @@
 @import "mixins";
 @import "compass/css3/inline-block";
 
-@mixin tip-color ($color) {
-  $TipBackColor: lighten($color, 55%);
-  $TipBorderColor: lighten($color, 40%);
-  color: $color;
-  border-color: $TipBorderColor;
-  background-color: $TipBackColor;
-  white-space: nowrap;
-  &.up {
-    &:before {
-      @include arrow();
-      top: -12px;
-      left: 10px;
-      border-color: transparent transparent $TipBorderColor transparent;
-    }
-
-    &:after {
-      @include arrow();
-      top: -11px;
-      left: 10px;
-      border-color: transparent transparent $TipBackColor transparent;
-    }
-  }
-
-  &.left {
-    &:before {
-      @include arrow();
-      left: -12px;
-      top: 7px;
-      border-color: transparent $TipBorderColor transparent transparent;
-    }
-
-    &:after {
-      @include arrow();
-      left: -11px;
-      top: 7px;
-      border-color: transparent $TipBackColor transparent transparent;
-    }
-  }
-
-  &.down {
-    &:before {
-      @include arrow();
-      left: 10px;
-      top: 26px;
-      border-color: $TipBorderColor transparent transparent transparent;
-    }
-
-    &:after {
-      @include arrow();
-      left: 10px;
-      top: 25px;
-      border-color: $TipBackColor transparent transparent transparent;
-    }
-  }
-}
-
 .tip {
   position: relative;
   left: 0px;
@@ -116,3 +60,4 @@
 .tip {
   position: absolute;
 }
+

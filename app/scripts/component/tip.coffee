@@ -23,8 +23,6 @@ class Tip
     $(".tip").remove() unless @noInterval
     $(@parent).addClass("parent-position")
     $(@parent).append(tipTemplate({type: @type, direct: @direct, message: @message, width: @width, left:@left, top: @top, otherClass: @otherClass, otherCss: @otherCss}))
-    # _.delay tipOrAlertRemove, @interval, ".tip" unless @noInterval
-    # _.delay parentPositionRevert, @interval, @parent unless @noInterval
 
   tipOrAlertRemove = (target)->
     $(target).remove()

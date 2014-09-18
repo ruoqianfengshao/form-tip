@@ -53,9 +53,6 @@ element =
     borderLeft = parseInt $(target).css("border-left").slice(0, -2)
     borderRight = parseInt $(target).css("border-right").slice(0, -2)
     marginRight = parseInt $(target).css("margin-right").slice(0, -2)
-    15 + arrowWidth + width + parentLeft - offsetLeft + paddingLeft + paddingRight + borderLeft + borderRight + marginRight
-
-  width: (target, parent, width) ->
-    width
+    10 + arrowWidth + width + offsetLeft - parentLeft + paddingLeft + paddingRight + borderLeft + borderRight + marginRight
 
 module.exports = element

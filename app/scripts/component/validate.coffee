@@ -3,7 +3,16 @@ validate = require "helper/validate"
 
 module.exports =
   $.fn.validateTip = (options)->
-    options = options || {}
+    ###
+      usage: $form.validateTip(options)
+      options =
+        identifie: {String} || [required]   # 需要校验的表单项
+        direct: 'up' or 'left'              # tip 的方向， 默认是 left, 可以在 identifie 上指定 data-direct
+        interval:  {integer}                # tip 显示的时间，毫秒级，默认是 0 ，可以在 idenifie 上指定 data-interval
+        before: {Function}                  # 表单检验之前执行
+        after: {Function}                   # 表单校验之后执行，只有返回 True 表单才可能被提交
+    ###
+    validate.options = options = options || {}
     identifie = options.identifie || '[required]'
     before = options.before || -> true
     after = options.after || -> true
@@ -21,4 +30,4 @@ module.exports =
           evt.preventDefault()
           evt.stopImmediatePropagation()
         else
-          console.log 1
+          after(@, $items)
