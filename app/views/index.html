@@ -6,7 +6,7 @@
     <title>Form tip test</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="../styles/app.css">
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -68,11 +68,14 @@
     .controls {
       margin-left: 115px;
     }
+    input {
+      margin: auto;
+    }
     </style>
     <h1>Forms</h1>
     <div>
       <p>
-        <form class="form">
+        <form class="form" id="form0">
           <fieldset>
             <div class="input-group input-group-append">
               <input type="text" placeholder="搜索项" required data-direct="up" data-empty-message="请输入搜索项" pattern="^\d*$" data-unvalid-message="请输入数字"><span class="input-group-btn">
@@ -111,11 +114,11 @@
             </div>
             <div class="control-group">
               <label for="password">输入密码:</label>
-              <input id="password" type="password" placeholder="密码" >
+              <input type="password" placeholder="密码" >
             </div>
             <div class="control-group">
               <label for="password">再次输入密码:</label>
-              <input id="password" type="password" placeholder="确认密码" >
+              <input type="password" placeholder="确认密码" >
             </div>
             <div class="control-group">
               <div class="controls">
@@ -192,7 +195,7 @@
         </div>
       </p>
       <p>
-        <form class="form form-aligned">
+        <form class="form form-aligned" id="form5">
           <table>
             <thead>
               <tr>
@@ -204,16 +207,16 @@
             </thead>
             <tbody>
               <tr>
-                <td><input type="text" required class="input-small" data-direct="up" data-empty-message="请填写用户名" data-unvaild-message=""></td>
-                <td><input type="text" data-type="mobile" required class="input-small" data-direct="up" data-empty-message="请填写手机号码" data-unvaild-message="请填写正确的中国大陆手机号"></td>
-                <td><input type="text" pattern="^\d{6}$" required class="input-small" data-direct="up" data-empty-message="邮编不能为空" data-unvaild-message="请填写正确的邮编"></td>
-                <td><input type="email" required class="input-small" data-direct="up" data-empty-message="请填写邮箱" data-unvaild-message="请填写正确的邮箱"></td>
+                <td><input type="text" required class="input-small" data-empty-message="请填写用户名" data-unvaild-message=""></td>
+                <td><input type="text" data-type="mobile" required class="input-small" data-empty-message="请填写手机号码" data-unvaild-message="请填写正确的中国大陆手机号"></td>
+                <td><input type="text" pattern="^\d{6}$" required class="input-small" data-empty-message="邮编不能为空" data-unvaild-message="请填写正确的邮编"></td>
+                <td><input type="email" required class="input-small" data-empty-message="请填写邮箱" data-unvaild-message="请填写正确的邮箱"></td>
               </tr>
               <tr>
-                <td><input type="text" required class="input-small" data-direct="up" parttern="^\d.*$"></td>
-                <td><input type="mobile" required class="input-small" data-direct="up"></td>
-                <td><input type="text" required class="input-small" data-direct="up" data-empty-message="" data-unvaild-message=""></td>
-                <td><input type="text" required class="input-small" data-direct="up" data-type="email"></td>
+                <td><input type="text" required class="input-small" parttern="^\d.*$" data-interval="2000"></td>
+                <td><input type="mobile" required class="input-small"></td>
+                <td><input type="text" required class="input-small" data-empty-message="" data-unvaild-message=""></td>
+                <td><input type="text" required class="input-small" data-type="email"></td>
               </tr>
             </tbody>
           </table>
@@ -224,9 +227,9 @@
       </p>
     </div>
     <hr>
-    <script src="/scripts/vendor.js"></script>
-    <script src="/scripts/app.js"></script>
-    <script src="/scripts/templates.js"></script>
+    <script src="../scripts/vendor.js"></script>
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/templates.js"></script>
     <script>require("app")()</script>
   </body>
 </html>
