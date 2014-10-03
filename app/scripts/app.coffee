@@ -3,6 +3,10 @@ require "helper/validate"
 require "component/validate"
 
 module.exports = ->
+  $("#form0").validateTip()
+  $("#form0").on "submit", (evt)->
+    evt.preventDefault()
+    alert "form0"
   $("#form1").validateTip()
   $("#form1").on "submit", (evt)->
     evt.preventDefault()

@@ -21,7 +21,6 @@ module.exports =
     before = options.before || -> true
     after = options.after || -> true
     errorCallBack = options.errorCallBack || (fields) ->
-    validate.options = options
 
     @each ->
       $form = $(@)
@@ -30,7 +29,7 @@ module.exports =
       $form.on "submit", (evt)->
         evt.preventDefault()
         before(this, $items)
-        validate.validateForm($form, $items)
+        validate.validateForm($form, $items, options)
         if validate.errorFields.length
           evt.preventDefault()
           evt.stopImmediatePropagation()

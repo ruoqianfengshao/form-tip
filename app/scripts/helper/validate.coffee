@@ -17,7 +17,7 @@ validate =
   novalidate: ($form) ->
     $form.attr('novalidate') || $form.attr('novalidate', 'true')
 
-  validateOne: ($item, parent)->
+  validateOne: ($item, options)->
     if !$item then "DONT VALIDATE UNEXIST ELEMENT"
 
     patterns.$item = $item
@@ -45,31 +45,29 @@ validate =
   validateFields: ($fields, parent)->
     # TO DO blur tip
 
-  tipAll: ->
+  tipAll: (options)->
     $.each @errorFields, (n, i) =>
-      @tipOne("all", i)
+      @tipOne(options, "all", i)
 
-  tipOne: (scope, i) ->
-    # console.log @options
+  tipOne: (options, scope, i) ->
     i = @errorFields[0] if scope is "one" and @errorFields.length isnt 0
     if i.error is 'unvalid'
       message = i.$el.data("unvalidMessage") || "请正确填写"
     else
       message = i.$el.data("emptyMessage") || "请填写此项"
     parent = i.parent
-    direct = if i.$el.data("direct") then i.$el.data("direct") else @options.direct
+    direct = if i.$el.data("direct") then i.$el.data("direct") else options.direct
     top = if direct is "left" then element.topWithLeft(i.$el, i.parent) else element.topWithUp(i.$el, i.parent)
     left = if direct is "left" then element.leftWithLeft(i.$el, i.parent) else element.leftWithUp(i.$el, i.parent)
-    interval = i.$el.data("interval") || @options.interval
+    interval = i.$el.data("interval") || options.interval
     new Tip({parent, direct, type: "error", message, top, left, interval}).show()
 
-
-  validateForm: ($form, $fields, parent) ->
+  validateForm: ($form, $fields, options) ->
     @errorFields = []
     @clearError($form)
     $.each $fields, (i, el) =>
-      @validateOne($(el), parent)
-    if @options.scope is "all" then @tipAll() else @tipOne("one")
+      @validateOne($(el), options)
+    if options.scope is "all" then @tipAll(options) else @tipOne(options, "one")
     if @errorFields.length then @errorFields else false
 
   clearError: ($form) ->
