@@ -47,20 +47,27 @@ validate =
 
   tipAll: (options)->
     $.each @errorFields, (n, i) =>
-      @tipOne(options, "all", i)
+      @showTip(options, i)
 
   tipOne: (options, scope, i) ->
-    i = @errorFields[0] if scope is "one" and @errorFields.length isnt 0
+    i = @errorFields[0] if @errorFields.length isnt 0
+    targetTop = i.$el.offset().top
+    windowScroll = $(window).scrollTop()
+    $(window).scrollTop(targetTop - 20) if targetTop < windowScroll
+    @showTip(options, i)
+
+  showTip: (options, i) ->
     if i.error is 'unvalid'
       message = i.$el.data("unvalidMessage") || "请正确填写"
     else
       message = i.$el.data("emptyMessage") || "请填写此项"
     parent = i.parent
-    direct = if i.$el.data("direct") then i.$el.data("direct") else options.direct
+    direct = i.$el.data("direct") || options.direct
     top = if direct is "left" then element.topWithLeft(i.$el, i.parent) else element.topWithUp(i.$el, i.parent)
     left = if direct is "left" then element.leftWithLeft(i.$el, i.parent) else element.leftWithUp(i.$el, i.parent)
     interval = i.$el.data("interval") || options.interval
     new Tip({parent, direct, type: "error", message, top, left, interval}).show()
+
 
   validateForm: ($form, $fields, options) ->
     @errorFields = []

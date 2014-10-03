@@ -13,6 +13,7 @@ module.exports = ->
     alert "form1"
   $("#form2").validateTip
     direct: "left"
+    scope: 'one'
   $("#form2").on "submit", (evt)->
     evt.preventDefault()
     alert "form2"
