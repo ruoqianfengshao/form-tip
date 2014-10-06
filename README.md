@@ -4,6 +4,7 @@ Just want to tip for elements such as input, textarea, table, button or some els
 
 ## What is it
   form-tip base on [validate.js](https://github.com/sofish/validator.js), and try to extend it with html5 data-*.
+  > Demo for [form-tip](http://ruoqianfengshao.github.io/form-tip/)
 
 ## How to use
 ### 1. 实例化
