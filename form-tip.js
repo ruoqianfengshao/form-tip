@@ -1,63 +1,4 @@
-(function() {
-  if (!this.require) {
-    var modules = {}, cache = {};
-
-    var require = function(name, root) {
-      var path = expand(root, name), indexPath = expand(path, './index'), module, fn;
-      module   = cache[path] || cache[indexPath];
-      if (module) {
-        return module;
-      } else if (fn = modules[path] || modules[path = indexPath]) {
-        module = {id: path, exports: {}};
-        cache[path] = module.exports;
-        fn(module.exports, function(name) {
-          return require(name, dirname(path));
-        }, module);
-        return cache[path] = module.exports;
-      } else {
-        throw 'module ' + name + ' not found';
-      }
-    };
-
-    var expand = function(root, name) {
-      var results = [], parts, part;
-      // If path is relative
-      if (/^\.\.?(\/|$)/.test(name)) {
-        parts = [root, name].join('/').split('/');
-      } else {
-        parts = name.split('/');
-      }
-      for (var i = 0, length = parts.length; i < length; i++) {
-        part = parts[i];
-        if (part == '..') {
-          results.pop();
-        } else if (part != '.' && part != '') {
-          results.push(part);
-        }
-      }
-      return results.join('/');
-    };
-
-    var dirname = function(path) {
-      return path.split('/').slice(0, -1).join('/');
-    };
-
-    this.require = function(name) {
-      return require(name, '');
-    };
-
-    this.require.define = function(bundle) {
-      for (var key in bundle) {
-        modules[key] = bundle[key];
-      }
-    };
-
-    this.require.modules = modules;
-    this.require.cache   = cache;
-  }
-
-  return this.require;
-}).call(this);/*!
+/*!
  * jQuery JavaScript Library v1.10.2
  * http://jquery.com/
  *
@@ -10113,8 +10054,8 @@ var __module1__ = (function(__dependency1__, __dependency2__) {
         } else {
           for(var key in context) {
             if(context.hasOwnProperty(key)) {
-              if(data) {
-                data.key = key;
+              if(data) { 
+                data.key = key; 
                 data.index = i;
                 data.first = (i === 0);
               }
@@ -10384,7 +10325,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
-
+  
   var stack1, helper;
   if (helper = helpers.otherClass) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.otherClass); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
@@ -10392,7 +10333,7 @@ function program1(depth0,data) {
   }
 
 function program3(depth0,data) {
-
+  
   var buffer = "", stack1, helper;
   buffer += "left:";
   if (helper = helpers.left) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -10403,7 +10344,7 @@ function program3(depth0,data) {
   }
 
 function program5(depth0,data) {
-
+  
   var buffer = "", stack1, helper;
   buffer += "top:";
   if (helper = helpers.top) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -10414,7 +10355,7 @@ function program5(depth0,data) {
   }
 
 function program7(depth0,data) {
-
+  
   var buffer = "", stack1, helper;
   buffer += "width:";
   if (helper = helpers.width) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -10425,7 +10366,7 @@ function program7(depth0,data) {
   }
 
 function program9(depth0,data) {
-
+  
   var stack1, helper;
   if (helper = helpers.otherCss) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.otherCss); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
@@ -10433,7 +10374,7 @@ function program9(depth0,data) {
   }
 
 function program11(depth0,data) {
-
+  
   var buffer = "", stack1, helper;
   buffer += "\n  <div class=\"tip-icon\">\n    <i class=\"icon-";
   if (helper = helpers.type) { stack1 = helper.call(depth0, {hash:{},data:data}); }
