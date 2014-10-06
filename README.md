@@ -12,7 +12,7 @@ Just want to tip for elements such as input, textarea, table, button or some els
 
 `$("#form").validateTip(options);`
 
-validator 方法支持一个 options 对象作为参数。当不传参数时，options 具备默认值。完整的对象如下描述：
+validateTip 方法支持一个 options 对象作为参数。当不传参数时，options 具备默认值。完整的对象如下描述：
 ```
 options = {
   // 需要校验的表单项，（默认是 `[required]`），支持任何 jQuery 选择器可以选择的标识
