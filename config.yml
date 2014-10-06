@@ -41,7 +41,6 @@ modules:
   ignored: vendor/**/*
   definition: /form-tip.js
 sprites:
-  path: ../
   path: images/
   selector: .icon-
 revision:
