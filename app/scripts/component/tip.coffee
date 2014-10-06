@@ -1,4 +1,4 @@
-tipTemplate = Handlebars.templates["tip"]
+tipTemplate = Handlebars.templates["component/templates/tip"]
 
 class Tip
   constructor: (@options)->

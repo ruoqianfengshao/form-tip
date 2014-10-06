@@ -5,10 +5,11 @@ groups:
     paths:
       - app/scripts
     concat:
-      "/scripts/app.js": "app/**/*.{js,coffee}"
-      "/scripts/vendor.js": "vendor/**/*.{js,coffee}"
+      "/form-tip.js": "{app,vendor}/**/*.{js,coffee}"
     order:
       - vendor/jquery.js
+      - vendor/handlebars.js
+      - vendor/templates.js
       - app/scripts/helper/validate.coffee
       - app/scripts/helper/pattern.coffee
       - ...
@@ -17,8 +18,7 @@ groups:
     paths:
       - app/styles
     concat:
-      "/styles/app.css": "app/styles/**/[a-z]*.{css,scss,sass}"
-      "/styles/vendor.css": "vendor/*.{css,scss,sass}"
+      "/form-tip.css": "app/styles/**/[a-z]*.{css,scss,sass}"
   images:
     paths:
       - app/images
@@ -31,13 +31,13 @@ groups:
       "/": "app/views/**/*.html"
   templates:
     paths:
-      - app/templates
+      - app/scripts
     precompile:
-      "/scripts/templates.js": "app/templates/**/*.hbs"
+      "../vendor/templates.js": "app/**/*.hbs"
 modules:
   wrapper: cmd
   ignored: vendor/**/*
-  definition: /scripts/app.js
+  definition: /form-tip.js
 sprites:
   path: /images/
   selector: .icon-

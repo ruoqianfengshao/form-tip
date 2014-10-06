@@ -6,7 +6,7 @@
     <title>Form tip test</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../styles/app.css">
+    <link rel="stylesheet" href="../form-tip.css">
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -227,9 +227,45 @@
       </p>
     </div>
     <hr>
-    <script src="../scripts/vendor.js"></script>
-    <script src="../scripts/app.js"></script>
-    <script src="../scripts/templates.js"></script>
-    <script>require("app")()</script>
+    <script src="../form-tip.js"></script>
+    <script>formTip = require("form_tip")</script>
+    <script>
+      $("#form0").validateTip();
+      $("#form0").on("submit", function(evt){
+        evt.preventDefault();
+        alert("form0");
+      });
+      $("#form1").validateTip();
+      $("#form1").on("submit", function(evt){
+        evt.preventDefault();
+        alert("form1");
+      });
+      $("#form2").validateTip({
+        direct: "left",
+        scope: 'one'
+      });
+      $("#form2").on("submit", function(evt){
+        evt.preventDefault();
+        alert("form2");
+      });
+      $("#form3").validateTip();
+      $("#form3").on("submit", function(evt){
+        evt.preventDefault();
+        alert("form3");
+      });
+      $("#form4").validateTip();
+      $("#form4").on("submit", function(evt){
+        evt.preventDefault();
+        alert("form4");
+      });
+      $("#form5").validateTip({
+        direct: "up",
+        scope: 'one'
+      });
+      $("#form5").on("submit", function(evt){
+        evt.preventDefault();
+        alert("form5");
+      });
+    </script>
   </body>
 </html>
