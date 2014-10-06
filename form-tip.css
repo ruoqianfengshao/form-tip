@@ -1,32 +1,4 @@
-/* line 1, app/styles/icons.scss */
-.icon-error {
-  width: 16px;
-  height: 16px;
-  background: url(images/icons.png) 0px 0px no-repeat;
-}
-
-/* line 6, app/styles/icons.scss */
-.icon-info {
-  width: 16px;
-  height: 16px;
-  background: url(images/icons.png) -16px 0px no-repeat;
-}
-
-/* line 11, app/styles/icons.scss */
-.icon-success {
-  width: 16px;
-  height: 16px;
-  background: url(images/icons.png) 0px -16px no-repeat;
-}
-
-/* line 16, app/styles/icons.scss */
-.icon-warning {
-  width: 16px;
-  height: 16px;
-  background: url(images/icons.png) -16px -16px no-repeat;
-}
-
-/* line 6, app/styles/app.scss */
+/* line 5, app/styles/app.scss */
 .tip {
   position: relative;
   left: 0px;
@@ -45,12 +17,12 @@
   color: #cccccc;
   border-radius: 4px;
 }
-/* line 19, app/styles/app.scss */
+/* line 18, app/styles/app.scss */
 .tip .tip-icon {
   float: left;
   margin-right: 4px;
 }
-/* line 23, app/styles/app.scss */
+/* line 22, app/styles/app.scss */
 .tip .tip-icon i {
   width: 16px;
   height: 16px;
@@ -62,16 +34,16 @@
   zoom: 1;
   *display: inline;
 }
-/* line 31, app/styles/app.scss */
+/* line 30, app/styles/app.scss */
 .tip .tip-message {
   float: left;
 }
-/* line 34, app/styles/app.scss */
+/* line 33, app/styles/app.scss */
 .tip .tip-message p {
   margin: 0;
 }
 
-/* line 40, app/styles/app.scss */
+/* line 39, app/styles/app.scss */
 .tip-success {
   color: #729755;
   border-color: #dbe6d2;
@@ -157,7 +129,7 @@
   border-color: white transparent transparent transparent;
 }
 
-/* line 44, app/styles/app.scss */
+/* line 43, app/styles/app.scss */
 .tip-warning {
   color: #fdab39;
   border-color: white;
@@ -243,7 +215,7 @@
   border-color: white transparent transparent transparent;
 }
 
-/* line 48, app/styles/app.scss */
+/* line 47, app/styles/app.scss */
 .tip-error {
   color: #cc003a;
   border-color: #ff99b6;
@@ -329,7 +301,7 @@
   border-color: #ffe5ed transparent transparent transparent;
 }
 
-/* line 52, app/styles/app.scss */
+/* line 51, app/styles/app.scss */
 .tip-info {
   color: #273485;
   border-color: #97a2e1;
@@ -415,12 +387,12 @@
   border-color: #d3d7f2 transparent transparent transparent;
 }
 
-/* line 56, app/styles/app.scss */
+/* line 55, app/styles/app.scss */
 .parent-position {
   position: relative;
 }
 
-/* line 60, app/styles/app.scss */
+/* line 59, app/styles/app.scss */
 .tip {
   position: absolute;
 }
