@@ -9,6 +9,7 @@ Just want to tip for elements such as input, textarea, table, button or some els
 ## How to use
 ### 1. 实例化
 `$("#form").validateTip();`
+
 `$("#form").validateTip(options);`
 
 validator 方法支持一个 options 对象作为参数。当不传参数时，options 具备默认值。完整的对象如下描述：
@@ -72,6 +73,7 @@ options = {
 
 ### 4. 表单提交
 ```javascript
+$("#form").validateTip();
 $("#form").on("submit", function(evt){
   evt.preventDefault();
   // submit action;
