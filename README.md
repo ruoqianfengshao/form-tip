@@ -42,18 +42,25 @@ options = {
 ### 3. 特殊参数
 支持在被校验元素上指定 tip 的参数：
  1. 提示方向 `data-direct`
+
  ```html
  <input type="text" data-direct="up" required>
  ```
+
  2. 提示存在时间 `data-interval`
+
  ```html
  <input type="text" data-interval="5000" required>
  ```
+
  3. 为空时提示 `data-empty-message`
+
  ```html
  <input type="text" data-empty-message="用户名称必填，由6-16位下划线、数字英文字母组成" name="name" required>
-```
+ ```
+
  4. 不正确时提示 `data-unvalid-message`
+
  ```html
  <input type="text" data-unvalid-message="请正确填写用户名称，由6-16位下划线、数字英文字母组成" name="name" required>
  ```
