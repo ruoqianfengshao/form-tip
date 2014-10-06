@@ -1,4 +1,4 @@
 vendor/
-public/
+public/.gitkeep
 .sass-cache/
 .DS_Store
