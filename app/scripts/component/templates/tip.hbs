@@ -1,7 +1,9 @@
 <div class="tip tip-{{type}} {{direct}} {{#if otherClass}}{{otherClass}}{{/if}}" style="{{#if left}}left:{{left}}px;{{/if}}{{#if top}}top:{{top}}px;{{/if}}{{#if width}}width:{{width}}px;{{/if}} {{#if otherCss}}{{otherCss}}{{/if}}">
-{{!--   <div class="tip-icon">
-    <i class="icon-{{type}}16"></i>
-  </div> --}}
+  {{#if icon}}
+  <div class="tip-icon">
+    <i class="icon-{{type}}"></i>
+  </div>
+  {{/if}}
   <div class="tip-message">
     <p>{{message}}</p>
   </div>

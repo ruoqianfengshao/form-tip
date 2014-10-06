@@ -62,12 +62,13 @@ validate =
     else
       message = i.$el.data("emptyMessage") || "请填写此项"
     parent = i.parent
+    icon = options.icon
     direct = i.$el.data("direct") || options.direct
     top = if direct is "left" then element.topWithLeft(i.$el, i.parent) else element.topWithUp(i.$el, i.parent)
     left = if direct is "left" then element.leftWithLeft(i.$el, i.parent) else element.leftWithUp(i.$el, i.parent)
     interval = i.$el.data("interval") || options.interval
-    new Tip({parent, direct, type: "error", message, top, left, interval}).show()
-
+    type = i.$el.data("tipType") || 'error'
+    new Tip({parent, direct, type, icon, message, top, left, interval}).show()
 
   validateForm: ($form, $fields, options) ->
     @errorFields = []

@@ -6,6 +6,7 @@ groups:
       - app/scripts
     concat:
       "/form-tip.js": "{app,vendor}/**/*.{js,coffee}"
+      "../form-tip.js": "{app,vendor}/**/*.{js,coffee}"
     order:
       - vendor/jquery.js
       - vendor/handlebars.js
@@ -19,11 +20,12 @@ groups:
       - app/styles
     concat:
       "/form-tip.css": "app/styles/**/[a-z]*.{css,scss,sass}"
+      "../form-tip.css": "app/styles/**/[a-z]*.{css,scss,sass}"
   images:
     paths:
       - app/images
     sprite:
-      "../app/images/icons.scss": "app/images/**/*.png"
+      "../app/styles/icons.scss": "app/images/**/*.png"
   views:
     paths:
       - app/views
@@ -39,7 +41,8 @@ modules:
   ignored: vendor/**/*
   definition: /form-tip.js
 sprites:
-  path: /images/
+  path: ../
+  path: images/
   selector: .icon-
 revision:
   files:

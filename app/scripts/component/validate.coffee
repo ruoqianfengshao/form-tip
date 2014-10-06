@@ -10,14 +10,16 @@ module.exports =
         direct: 'left' or 'up'              # tip 的方向， 默认是 left, 可以在 identifie 上指定 data-direct
         interval:  {Integer} || 0           # tip 显示的时间，毫秒级，默认是 0 (不自动消失)，可以在 idenifie 上指定 data-interval
         scope: 'all' or 'one'               # tip 的 提示方式，所有一起提示还是提示第一个, 默认是提示所有
+        icon: true or false                 # tip 的显示是否带icon， 默认 false (不带)
         before: {Function}                  # 表单检验之前执行
-        after: {Function}                   # 表单校验之后执行，只有返回 True 表单才可能被提交
+        after: {Function}                   # 表单校验之后执行，只有返回 true 表单才可能被提交
     ###
     options = options || {}
     identifie = options.identifie || '[required]'
     options.direct = options.direct || 'left'
-    options.interval = options.interval || 0
     options.scope = options.scope || 'all'
+    options.icon = options.icon || false
+    options.interval = options.interval || 0
     before = options.before || -> true
     after = options.after || -> true
     errorCallBack = options.errorCallBack || (fields) ->

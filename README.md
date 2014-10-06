@@ -25,11 +25,14 @@ options = {
   // tip 的提示方式，'all' 代表一起提示，'one' 代表提示第一个, 默认是 'all'
   scope: {'all' or 'one'},
 
+  // tip 的提示样式是否带图标，true 代表带有图标，false 代表不带图标, 默认是 false
+  icon: {true or false},
+
   // 出错时的 callback，第一个参数是所有出错表单项集合
   errorCallback(unvalidFields): {Function},
 
   before: {Function}, // 表单检验之前
-  after: {Function}, // 表单校验之后，只有 __return true__ 才会提交表单
+  after: {Function},  // 表单校验之后，只有 __return true__ 才会提交表单
 }
 ```
 ### 2. 校验
