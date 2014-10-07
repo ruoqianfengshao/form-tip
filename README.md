@@ -7,7 +7,15 @@ Just want to tip for elements such as input, textarea, table, button or some els
   > Demo for [form-tip](http://ruoqianfengshao.github.io/form-tip/)
 
 ## How to use
-### 1. 实例化
+### 1. link
+
+```html
+<link rel="stylesheet" href="https://rawgit.com/ruoqianfengshao/form-tip/master/public/form-tip.css">
+<script src="https://rawgit.com/ruoqianfengshao/form-tip/master/public/form-tip.js"></script>
+<script>formTip = require("form_tip")</script>
+```
+
+### 2. 实例化
 `$("#form").validateTip();`
 
 `$("#form").validateTip(options);`
@@ -37,11 +45,11 @@ options = {
   after: {Function},  // 表单校验之后，只有 __return true__ 才会提交表单
 }
 ```
-### 2. 校验
+### 3. 校验
 通过 `data-type` 、 `type` ，对表单元素及 button 等其他非表单元素进行校验，校验被指定元素上的 `data-value` 或 `value` 以及 `[contenteditable].text()`
 目前支持的 type 和 validate.js 保持一致，后续根据项目需要加入其他类型的校验。
 
-### 3. 特殊参数
+### 4. 特殊参数
 支持在被校验元素上指定 tip 的参数：
  1. 提示方向 `data-direct`
 
@@ -71,7 +79,7 @@ options = {
  1. 为空时提示 “请填写此项”
  2. 不正确时提示 “请正确填写”
 
-### 4. 表单提交
+### 5. 表单提交
 ```javascript
 $("#form").validateTip();
 $("#form").on("submit", function(evt){
@@ -79,3 +87,5 @@ $("#form").on("submit", function(evt){
   // submit action;
 })
 ```
+### 6. 许可协议
+基于 MIT 协议授权，你可以使用于任何地方（包括商业应用）、修改并重新发布。详见：[LICENSE](https://github.com/ruoqianfengshao/form-tip/blob/gh-pages/LICENSE)
