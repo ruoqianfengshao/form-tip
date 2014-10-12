@@ -23,7 +23,7 @@ validate =
     patterns.$item = $item
     pattern = $item.attr "pattern" if $item.attr "pattern"
     pattern and pattern.replace('\\', '\\\\')
-    type = $item.data("type") || 'text'
+    type = $item.data("type") || $item.attr "type" || 'text'
     type = if patterns[type] then type else 'text'
     val = $.trim @getVal($item)
     parent = if parent then $item.closest(parent) else $item.parent()
@@ -50,11 +50,12 @@ validate =
       @showTip(options, i)
 
   tipOne: (options, scope, i) ->
-    i = @errorFields[0] if @errorFields.length isnt 0
-    targetTop = i.$el.offset().top
-    windowScroll = $(window).scrollTop()
-    $(window).scrollTop(targetTop - 20) if targetTop < windowScroll
-    @showTip(options, i)
+    if @errorFields.length
+      i = @errorFields[0]
+      targetTop = i.$el.offset().top
+      windowScroll = $(window).scrollTop()
+      $(window).scrollTop(targetTop - 20) if targetTop < windowScroll
+      @showTip(options, i)
 
   showTip: (options, i) ->
     if i.error is 'unvalid'

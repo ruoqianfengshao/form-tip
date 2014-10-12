@@ -10506,7 +10506,7 @@ this.require.define({"helper/validate":function(exports, require, module){(funct
         pattern = $item.attr("pattern");
       }
       pattern && pattern.replace('\\', '\\\\');
-      type = $item.data("type") || 'text';
+      type = $item.data("type") || $item.attr("type" || 'text');
       type = patterns[type] ? type : 'text';
       val = $.trim(this.getVal($item));
       parent = parent ? $item.closest(parent) : $item.parent();
@@ -10535,15 +10535,15 @@ this.require.define({"helper/validate":function(exports, require, module){(funct
     },
     tipOne: function(options, scope, i) {
       var targetTop, windowScroll;
-      if (this.errorFields.length !== 0) {
+      if (this.errorFields.length) {
         i = this.errorFields[0];
+        targetTop = i.$el.offset().top;
+        windowScroll = $(window).scrollTop();
+        if (targetTop < windowScroll) {
+          $(window).scrollTop(targetTop - 20);
+        }
+        return this.showTip(options, i);
       }
-      targetTop = i.$el.offset().top;
-      windowScroll = $(window).scrollTop();
-      if (targetTop < windowScroll) {
-        $(window).scrollTop(targetTop - 20);
-      }
-      return this.showTip(options, i);
     },
     showTip: function(options, i) {
       var direct, icon, interval, left, message, parent, top, type;

@@ -2,3 +2,4 @@ vendor/
 public/.gitkeep
 .sass-cache/
 .DS_Store
+stdout
