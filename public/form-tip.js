@@ -10685,6 +10685,13 @@ this.require.define({"helper/pattern":function(exports, require, module){(functi
       } else {
         return notEmpty(text) && text.length <= max;
       }
+    },
+    hasChild: function(text) {
+      if ($item.children().length) {
+        return true;
+      } else {
+        return false;
+      }
     }
   };
 

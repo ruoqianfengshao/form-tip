@@ -106,3 +106,8 @@ module.exports =
       !!text.length and !/^\s+$/.test(text)
 
     if isNaN(max) then notEmpty(text) else notEmpty(text) and text.length <= max
+
+  # hasChild 有子元素，适用于 tr，td，tbody 等需要校验是否有子元素的元素
+  hasChild: (text)->
+    if $item.children().length then true else false
+
