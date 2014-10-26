@@ -10499,7 +10499,7 @@ this.require.define({"helper/validate":function(exports, require, module){(funct
     validateOne: function($item, options) {
       var event, message, parent, pattern, type, val;
       if (!$item) {
-        "DONT VALIDATE UNEXIST ELEMENT";
+        return "DONT VALIDATE UNEXIST ELEMENT";
       }
       patterns.$item = $item;
       if ($item.attr("pattern")) {
@@ -10529,7 +10529,7 @@ this.require.define({"helper/validate":function(exports, require, module){(funct
     tipAll: function(options) {
       return $.each(this.errorFields, (function(_this) {
         return function(n, i) {
-          return _this.showTip(options, i);
+          return _this.bindOneTip(options, i);
         };
       })(this));
     },
@@ -10542,11 +10542,11 @@ this.require.define({"helper/validate":function(exports, require, module){(funct
         if (targetTop < windowScroll) {
           $(window).scrollTop(targetTop - 20);
         }
-        return this.showTip(options, i);
+        return this.bindOneTip(options, i);
       }
     },
-    showTip: function(options, i) {
-      var direct, icon, interval, left, message, parent, top, type;
+    bindOneTip: function(options, i) {
+      var direct, icon, interval, left, message, parent, tip, top, type;
       if (i.error === 'unvalid') {
         message = i.$el.data("unvalidMessage") || "请正确填写";
       } else {
@@ -10555,11 +10555,11 @@ this.require.define({"helper/validate":function(exports, require, module){(funct
       parent = i.parent;
       icon = options.icon;
       direct = i.$el.data("direct") || options.direct;
-      top = direct === "left" ? element.topWithLeft(i.$el, i.parent) : element.topWithUp(i.$el, i.parent);
-      left = direct === "left" ? element.leftWithLeft(i.$el, i.parent) : element.leftWithUp(i.$el, i.parent);
+      top = i.$el.data("top") ? i.$el.data("top") : direct === "left" ? element.topWithLeft(i.$el, i.parent) : element.topWithUp(i.$el, i.parent);
+      left = i.$el.data("left") ? i.$el.data("left") : direct === "left" ? element.leftWithLeft(i.$el, i.parent) : element.leftWithUp(i.$el, i.parent);
       interval = i.$el.data("interval") || options.interval;
       type = i.$el.data("tipType") || 'error';
-      return new Tip({
+      tip = new Tip({
         parent: parent,
         direct: direct,
         type: type,
@@ -10568,11 +10568,16 @@ this.require.define({"helper/validate":function(exports, require, module){(funct
         top: top,
         left: left,
         interval: interval
-      }).show();
+      });
+      tip.show();
+      i.$el.data("tip", tip);
+      if (options.disappear !== 'time') {
+        return i.$el.on("" + options.disappear, tip.remove);
+      }
     },
     validateForm: function($form, $fields, options) {
       this.errorFields = [];
-      this.clearError($form);
+      this.clearError($fields);
       $.each($fields, (function(_this) {
         return function(i, el) {
           return _this.validateOne($(el), options);
@@ -10589,8 +10594,12 @@ this.require.define({"helper/validate":function(exports, require, module){(funct
         return false;
       }
     },
-    clearError: function($form) {
-      return $form.find(".tip").remove();
+    clearError: function($fields) {
+      return $.each($fields, function(i, el) {
+        if ($(el).data("tip")) {
+          return $(el).data("tip").remove();
+        }
+      });
     }
   };
 
@@ -10698,13 +10707,15 @@ this.require.define({"helper/pattern":function(exports, require, module){(functi
 }).call(this);
 ;}});
 this.require.define({"component/tip":function(exports, require, module){(function() {
-  var Tip, tipTemplate;
+  var Tip, tipTemplate,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   tipTemplate = Handlebars.templates["component/templates/tip"];
 
   Tip = (function() {
     function Tip(options) {
       this.options = options;
+      this.remove = __bind(this.remove, this);
       this.getInterval();
       this.tip = $(tipTemplate(this.options));
     }
@@ -10718,22 +10729,14 @@ this.require.define({"component/tip":function(exports, require, module){(functio
       $(this.options.parent).addClass("parent-position");
       this.tip.appendTo($(this.options.parent));
       if (!this.options.noInterval) {
-        setTimeout(this.remove, this.options.interval, this.tip);
-      }
-      if (!this.options.noInterval) {
-        return setTimeout(this.parentPositionRevert, this.options.interval, this.options.parent);
+        return setTimeout(this.remove, this.options.interval);
       }
     };
 
-    Tip.prototype.remove = function(target) {
-      return $(target).remove();
+    Tip.prototype.remove = function() {
+      $(this.options.parent).removeClass("parent-position");
+      return this.tip.remove();
     };
-
-    Tip.prototype.parentPositionRevert = function(target) {
-      return $(target).removeClass("parent-position");
-    };
-
-    $(document).on("blur", function() {});
 
     return Tip;
 
@@ -10757,6 +10760,8 @@ this.require.define({"component/validate":function(exports, require, module){(fu
       options =
         identifie: {String} || [required]   # 需要校验的表单项，选择器
         direct: 'left' or 'up'              # tip 的方向， 默认是 left, 可以在 identifie 上指定 data-direct
+         * TODO appear: '{Event} || submit'         # 触发 tip 出现的动作，默认是 submit（表单提交），如果不为 submit， 其他动作校验一律即时生效
+        disapper: '{Event} || time'         # 触发 tip 消失的动作，默认是 time（时间触发），可以是其他 event, 如 focusin
         interval:  {Integer} || 0           # tip 显示的时间，毫秒级，默认是 0 (不自动消失)，可以在 idenifie 上指定 data-interval
         scope: 'all' or 'one'               # tip 的 提示方式，所有一起提示还是提示第一个, 默认是提示所有
         icon: true or false                 # tip 的显示是否带icon， 默认 false (不带)
@@ -10767,6 +10772,7 @@ this.require.define({"component/validate":function(exports, require, module){(fu
     options = options || {};
     identifie = options.identifie || '[required]';
     options.direct = options.direct || 'left';
+    options.disappear = options.disappear || 'time';
     options.scope = options.scope || 'all';
     options.icon = options.icon || false;
     options.interval = options.interval || 0;
