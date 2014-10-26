@@ -6,7 +6,7 @@
     <title>Form tip test</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://rawgit.com/ruoqianfengshao/form-tip/master/public/form-tip.css">
+    <link rel="stylesheet" href="../form-tip.css">
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -71,6 +71,71 @@
     input {
       margin: auto;
     }
+    .table {
+      background-color: white;
+      border-collapse: collapse;
+      border-spacing: 0;
+      empty-cells: show;
+      line-height: 18px;
+    }
+    .table caption {
+      color: #000;
+      font: italic 85%/1 arial, sans-serif;
+      padding: 1em 0;
+      text-align: center;
+    }
+    .table td,
+    .table th {
+      border: 1px solid #eeeeee;
+      border-width: 0 0 1px 0;
+      font-size: inherit;
+      margin: 0;
+      text-align: center;
+      overflow: visible;
+      font-weight: normal;
+      vertical-align: middle;
+      height: 40px;
+    }
+    .table td {
+      vertical-align: middle;
+      padding: 10px 0;
+      word-wrap: break-word;
+    }
+    .table td input[type=checkbox] {
+      margin-top: 2px;
+    }
+    .table td:first-child,
+    .table th:first-child {
+      border-left-width: 0;
+    }
+    .table thead {
+      text-align: left;
+      vertical-align: bottom;
+    }
+
+    .table-horizontal td,
+    .table-horizontal th {
+      border-width: 0 0 1px 0;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .table-striped td,
+    .table-striped th {
+      padding: 0;
+      border: 1px solid #eeeeee;
+      border-width: 1px;
+      height: 36px;
+    }
+    .table-striped td {
+      line-height: 18px;
+    }
+    .table-striped td:first-child,
+    .table-striped th:first-child {
+      border: 1px solid #eeeeee;
+    }
+    .inner-table td {
+      border: none !important;
+    }
     </style>
     <h1>Forms</h1>
     <div>
@@ -106,7 +171,7 @@
           <fieldset>
             <div class="control-group">
               <label for="email"><span class="required">*</span>邮箱:</label>
-              <input id="email" type="email" placeholder="邮箱" data-unvalid-message="请输入正确的邮箱，如boy@example.com" data-top="30" data-left="10" required>
+              <input id="email" type="email" placeholder="邮箱" data-unvalid-message="请输入正确的邮箱，如boy@example.com" required>
             </div>
             <div class="control-group">
               <label for="name">用户名:</label>
@@ -225,9 +290,63 @@
           </div>
         </form>
       </p>
+
+      <p>
+        <form id="form6">
+          <table class="table table-striped" id="team-member-table" style="width:859px;">
+            <thead>
+              <tr>
+                <th width="250">节点</th>
+                <th width="200">姓名</th>
+                <th width="210">工号</th>
+                <th width="200">联系电话</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td width="250">
+                  <span class="span-right">技术</span>
+                </td>
+                <td colspan="5" class="inner-table-td">
+                  <table class="table inner-table" id="tech-member-table">
+                    <tr class="member-tr">
+                      <td width="200">张三</td>
+                      <td width="210">110000</td>
+                      <td width="200">12345678901</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td width="250">
+                  <span class="span-right"><span class="required">*</span>响应</span>
+                </td>
+                <td colspan="5" class="inner-table-td">
+                  <table class="table inner-table" id="response-member-table">
+                    <tbody data-type="hasChild" data-empty-message="响应成员不能为空" required></tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="span-right"><span class="required">*</span>质量</span>
+                </td>
+                <td colspan="5" class="inner-table-td">
+                  <table class="table inner-table" id="quality-member-table">
+                    <tbody data-type="hasChild" data-empty-message="质量成员不能为空" data-top="23" required></tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            <input type="submit" class="btn btn-primary btn-medium" value="提交">
+          </p>
+        </form>
+      </p>
     </div>
     <hr>
-    <script src="https://rawgit.com/ruoqianfengshao/form-tip/master/public/form-tip.js"></script>
+    <script src="../form-tip.js"></script>
     <script>formTip = require("form_tip")</script>
     <script>
       $("#form0").validateTip();
@@ -261,11 +380,20 @@
       });
       $("#form5").validateTip({
         direct: "up",
+        disappear: 'focusin',
         scope: 'one'
       });
       $("#form5").on("submit", function(evt){
         evt.preventDefault();
         alert("form5");
+      });
+      $("#form6").validateTip({
+        direct: "up",
+        scope: 'one'
+      });
+      $("#form6").on("submit", function(evt){
+        evt.preventDefault();
+        alert("form6");
       });
     </script>
   </body>
