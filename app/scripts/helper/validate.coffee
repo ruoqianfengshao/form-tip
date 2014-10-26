@@ -18,12 +18,12 @@ validate =
     $form.attr('novalidate') || $form.attr('novalidate', 'true')
 
   validateOne: ($item, options)->
-    if !$item then "DONT VALIDATE UNEXIST ELEMENT"
+    return "DONT VALIDATE UNEXIST ELEMENT" if !$item
 
     patterns.$item = $item
     pattern = $item.attr "pattern" if $item.attr "pattern"
     pattern and pattern.replace('\\', '\\\\')
-    type = $item.data("type") || 'text'
+    type = $item.data("type") || $item.attr "type" || 'text'
     type = if patterns[type] then type else 'text'
     val = $.trim @getVal($item)
     parent = if parent then $item.closest(parent) else $item.parent()
@@ -47,16 +47,17 @@ validate =
 
   tipAll: (options)->
     $.each @errorFields, (n, i) =>
-      @showTip(options, i)
+      @bindOneTip(options, i)
 
   tipOne: (options, scope, i) ->
-    i = @errorFields[0] if @errorFields.length isnt 0
-    targetTop = i.$el.offset().top
-    windowScroll = $(window).scrollTop()
-    $(window).scrollTop(targetTop - 20) if targetTop < windowScroll
-    @showTip(options, i)
+    if @errorFields.length
+      i = @errorFields[0]
+      targetTop = i.$el.offset().top
+      windowScroll = $(window).scrollTop()
+      $(window).scrollTop(targetTop - 20) if targetTop < windowScroll
+      @bindOneTip(options, i)
 
-  showTip: (options, i) ->
+  bindOneTip: (options, i) ->
     if i.error is 'unvalid'
       message = i.$el.data("unvalidMessage") || "请正确填写"
     else
@@ -64,21 +65,25 @@ validate =
     parent = i.parent
     icon = options.icon
     direct = i.$el.data("direct") || options.direct
-    top = if direct is "left" then element.topWithLeft(i.$el, i.parent) else element.topWithUp(i.$el, i.parent)
-    left = if direct is "left" then element.leftWithLeft(i.$el, i.parent) else element.leftWithUp(i.$el, i.parent)
+    top = if i.$el.data("top") then i.$el.data("top") else if direct is "left" then element.topWithLeft(i.$el, i.parent) else element.topWithUp(i.$el, i.parent)
+    left = if i.$el.data("left") then i.$el.data("left") else  if direct is "left" then element.leftWithLeft(i.$el, i.parent) else element.leftWithUp(i.$el, i.parent)
     interval = i.$el.data("interval") || options.interval
     type = i.$el.data("tipType") || 'error'
-    new Tip({parent, direct, type, icon, message, top, left, interval}).show()
+    tip = new Tip({parent, direct, type, icon, message, top, left, interval})
+    tip.show()
+    i.$el.data("tip", tip)
+    i.$el.on "#{options.disappear}", tip.remove if options.disappear isnt 'time'
 
   validateForm: ($form, $fields, options) ->
     @errorFields = []
-    @clearError($form)
+    @clearError($fields)
     $.each $fields, (i, el) =>
       @validateOne($(el), options)
     if options.scope is "all" then @tipAll(options) else @tipOne(options, "one")
     if @errorFields.length then @errorFields else false
 
-  clearError: ($form) ->
-    $form.find(".tip").remove()
+  clearError: ($fields) ->
+    $.each $fields, (i, el) ->
+      $(el).data("tip").remove() if $(el).data("tip")
 
 module.exports = validate

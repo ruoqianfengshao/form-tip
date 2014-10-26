@@ -4,13 +4,23 @@ Just want to tip for elements such as input, textarea, table, button or some els
 
 ## What is it
   form-tip base on [validate.js](https://github.com/sofish/validator.js), and try to extend it with html5 data-*.
+  > Demo for [form-tip](http://ruoqianfengshao.github.io/form-tip/)
 
 ## How to use
-### 1. 实例化
+### 1. link
+
+```html
+<link rel="stylesheet" href="https://rawgit.com/ruoqianfengshao/form-tip/master/public/form-tip.css">
+<script src="https://rawgit.com/ruoqianfengshao/form-tip/master/public/form-tip.js"></script>
+<script>formTip = require("form_tip")</script>
+```
+
+### 2. 实例化
 `$("#form").validateTip();`
+
 `$("#form").validateTip(options);`
 
-validator 方法支持一个 options 对象作为参数。当不传参数时，options 具备默认值。完整的对象如下描述：
+validateTip 方法支持一个 options 对象作为参数。当不传参数时，options 具备默认值。完整的对象如下描述：
 ```
 options = {
   // 需要校验的表单项，（默认是 `[required]`），支持任何 jQuery 选择器可以选择的标识
@@ -35,11 +45,11 @@ options = {
   after: {Function},  // 表单校验之后，只有 __return true__ 才会提交表单
 }
 ```
-### 2. 校验
+### 3. 校验
 通过 `data-type` 、 `type` ，对表单元素及 button 等其他非表单元素进行校验，校验被指定元素上的 `data-value` 或 `value` 以及 `[contenteditable].text()`
 目前支持的 type 和 validate.js 保持一致，后续根据项目需要加入其他类型的校验。
 
-### 3. 特殊参数
+### 4. 特殊参数
 支持在被校验元素上指定 tip 的参数：
  1. 提示方向 `data-direct`
 
@@ -69,10 +79,13 @@ options = {
  1. 为空时提示 “请填写此项”
  2. 不正确时提示 “请正确填写”
 
-### 4. 表单提交
+### 5. 表单提交
 ```javascript
+$("#form").validateTip();
 $("#form").on("submit", function(evt){
   evt.preventDefault();
   // submit action;
 })
 ```
+### 6. 许可协议
+基于 MIT 协议授权，你可以使用于任何地方（包括商业应用）、修改并重新发布。详见：[LICENSE](https://github.com/ruoqianfengshao/form-tip/blob/gh-pages/LICENSE)

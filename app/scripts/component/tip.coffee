@@ -10,19 +10,13 @@ class Tip
     @options.interval = if @options.interval then @options.interval else 3000
 
   show: ->
-    $(@options.parent).addClass("parent-position")
-    @tip.appendTo($(@options.parent))
-    setTimeout @remove, @options.interval, @tip unless @options.noInterval
-    setTimeout @parentPositionRevert, @options.interval, @options.parent unless @options.noInterval
-
-  remove: (target) ->
-    $(target).remove()
-
-  parentPositionRevert: (target) ->
-    $(target).removeClass("parent-position")
+    $(@options.parent).addClass "parent-position"
+    @tip.appendTo $(@options.parent)
+    setTimeout @remove, @options.interval unless @options.noInterval
 
   # API for element tip
-  $(document).on "blur", ->
-
+  remove: =>
+    $(@options.parent).removeClass "parent-position"
+    @tip.remove()
 
 module.exports =  Tip
