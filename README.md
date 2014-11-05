@@ -29,6 +29,9 @@ options = {
   // tip 的方向， 默认是 left， 可以在 identifie 上指定 data-direct
   direct: {'left' or 'up'},
 
+  // 触发 tip 消失的动作，默认是 time（时间触发），可以是其他 event, 如 focusin
+  disapper: '{Event} || time',
+
   // tip 显示的时间，毫秒级，默认是 0（不自动消失），可以在 identifie 上指定 data-interval
   interval:  {Integer},
 
